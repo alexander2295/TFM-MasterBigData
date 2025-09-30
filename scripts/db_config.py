@@ -1,9 +1,14 @@
-db_config = {
-    "server": "host.docker.internal",
-    "port": 1433,
-    "database": "olva",
-    "user": "etl_user",
-    "password": "StrongPass123",
-    "driver": "com.microsoft.sqlserver.jdbc.SQLServerDriver",
-    "jdbc_url": "jdbc:sqlserver://host.docker.internal:1433;databaseName=olva;encrypt=false;trustServerCertificate=true"
+import os
+from dotenv import load_dotenv
+
+# Cargar el archivo .env
+load_dotenv("/etc/credenciales/.env", override=True)
+
+# Configuración de MariaDB
+db_configMaria = {
+    "server": os.getenv("MB_HOST", "mariadb"),
+    "port": int(os.getenv("MB_PORT", "3306")),
+    "database": os.getenv("MB_DATABASE", "etl_config"),
+    "user": os.getenv("MB_USER", "root"),
+    "password": os.getenv("MB_PASSWORD", "StrongPass123")
 }
